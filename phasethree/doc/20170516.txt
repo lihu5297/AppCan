@@ -1,0 +1,15 @@
+//主任务增加工时字段
+
+alter table T_TASK ADD workHour float(5,1) default 0;
+
+高校版本有课程体系(VideoController)
+需要返回接口给前端
+1. 根据类别(初级JUNIOR,中级MIDDLE,高级SENIOR)查询课程体系http://ip:port/cooldev/video
+     get 方法
+     参数 type 值为初级JUNIOR,中级MIDDLE,高级SENIOR
+     pageNo 默认为1
+     pageSize 每页显示多少条,默认15
+     
+2.查询课程详情http://ip:port/cooldev/video/{id}
+
+

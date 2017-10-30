@@ -1,0 +1,48 @@
+-----企业版
+	 location ~/resourceDown/(\d+)/(\d+) {
+                proxy_pass http://zymobiApi_pool/cooldev/resource/down/$1;
+	        proxy_set_header  loginUserId $2;
+	}
+
+        location /nginxdown {
+                internal;
+                alias /usr/share/nginx/coopDevelopment_private/upload;
+                sendfile        on;
+                default_type    application/octet-stream;
+        }
+
+
+        location ~/downPubResource/([\w\W]*) {
+                proxy_pass http://zymobiApi_pool/cooldev/resource/downPubResource/$1;
+        }
+
+        location /nginxpubdown {
+                internal;
+                alias /usr/share/nginx/coopDevelopment_private/upload;
+                sendfile        on;
+                default_type    application/octet-stream;
+        }
+
+
+-----大众版 
+        location ~/resourceDown/(\d+)/(\d+) {
+                proxy_pass http://xtApi_pool/cooldev/resource/down/$1;
+                proxy_set_header  loginUserId $2;
+        }
+        location /nginxdown {
+                internal;
+                alias /usr/share/nginx/coopDevelopment_online/upload;
+                sendfile        on;
+                default_type    application/octet-stream;
+        }
+        location ~/downPubResource/([\w\W]*) {
+                proxy_pass http://xtApi_pool/cooldev/resource/downPubResource/$1;
+        }
+
+        location /nginxpubdown {
+                internal;
+                alias /usr/share/nginx/coopDevelopment_online/upload;
+                sendfile        on;
+                default_type    application/octet-stream;
+        }
+

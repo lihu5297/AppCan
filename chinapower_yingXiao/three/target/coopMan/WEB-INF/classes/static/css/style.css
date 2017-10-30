@@ -1,0 +1,98 @@
+﻿body{position: absolute; width: 100%; height: 100%; font-family: "微软雅黑"; font-size:14px; background: #eff0f4;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box; /* Safari */}
+a,a:hover,a:visited,a:link{text-decoration: none;cursor: pointer;}
+ul,li{list-style: none; padding: 0; margin: 0}
+a{outline: none !important;}
+input,button{outline: none}
+.fr{float: right;}
+.fl{float: left;}
+.clear{clear: both;}
+.navbar1 .logoW{line-height: 60px; color: #fff; font-size: 18px;}
+.header-right{float: right; line-height: 60px; margin-left: 30px;}
+.header-right span{color: #fff; font-size: 14px;}
+.header-right .photo{width: 30px; height: 30px; margin-right: 5px;}
+.header-right .exit{background: url(../images/exit.png) 22px 21px no-repeat; height: 60px; width: 100px; padding-left: 50px; display: block; float: left; color: #fff; line-height: 60px;}
+.header-right a:hover.exit{background-color: #4fb9bd}
+.bgcolor1{background: #424f62}
+.padding0{padding: 0}
+.navbar-default{width: 100%; height: 60px; line-height: 60px; background-color: #3da1a7; float: left;}
+.navbar-default .navbar1{float: left; display: block; float: left; margin-left: 10px;}
+.navbar1 .hidden-xs{margin-right: 8px; display: block; float: left;margin-top: 8px;height: 44px;}
+.navbar1 > span{display: block; float: left;}
+.main{width: 100%; float: left; background-color: #424f62;}
+.main .left{float: left; width: 250px; background-color: #424f62;color: #fff; height: 100%;}
+.main .right{ margin-left: 250px; background-color: #eff0f4; padding: 0 10px 0 20px;}
+.left .menuNav,.menuNav li{width: 100%; float: left;}
+.menuNav li{padding-left: 20px; }
+.menuNav > li a{display: block; float: left; height: 45px; line-height: 45px; color: #fff; width: 100%;}
+.menuNav > li.active,.menuNav > li:hover{display:block; background-color: #383f4e}
+.menuNav > li .nav-pills{width: 232px; float: right; display: none;}
+.menuNav > li .nav-pills li,.menuNav > li .nav-pills li a{float: left; width: 100%; height: 30px; line-height: 30px;}
+.right .tables td,.right .tables th{text-align: center;}
+.right .tables td a{color: #4fb9bd; padding: 0 5px}
+.right .tables td a:hover{text-decoration: underline; color: #28303e}
+.right .right-header{width: 100%; float: left; margin-bottom: 10px;}
+.right .title{height: 30px; line-height: 30px; font-size: 18px; display: block; float: left;}
+.right .btn-niu{width: 265px; float: right; height:30px; margin-right: 5px;}
+.right .btn-niu .form-control{padding: 0px 12px; height: 30px; line-height: 30px;}
+.right .btn-niu .btn-default{color: #fff; background-color: #337ab7; border-color: #2e6da4;}
+.right .btn-niu .btn-default:hover{color: #fff;background-color: #286090;border-color: #204d74;}
+.right .btn{height: 30px; display:block; float: right; margin-right: 8px; line-height: 30px; padding:0 12px;}
+.right .downModle{display: block; float: right; text-decoration: underline; height: 30px; line-height: 30px; color: #4fb9bd}
+.right .location{width: 100%; height: 60px; line-height: 60px;}
+.right .location a{color: #28303e; font-size: 17px; line-height: 60px;}
+.right .location a.active{color: #37a1a8;}
+.right .content{float: left; background-color: #fff; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; width: 100%; padding: 10px 10px 0 10px;}
+.right .page{width: 100%; float: left; height: 30px; line-height: 30px;margin-top: 15px;margin-bottom: 20px;}
+
+.right .page .total,.right .right-content{float: left; display: block;}
+.right .right-content{width: 100%;}
+.right-content{min-height:600px;}
+.showpage{margin-right: 10px; display: block;}
+.page #page{float: left;}
+.page #page li{float: left;}
+.page #page li > input{height: 30px; line-height: 30px; width: 30px; text-align: center; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px;}
+.page #page li a{font-size: 16px; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; width: 30px; height: 30px; line-height: 30px; text-align: center; display: block; float: left; color: #fff; margin: 0 5px; background-color: #57c9cd; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px;}
+.superadmintable tr{
+	margin-bottom: 20px;
+    display: block;
+}
+.superadmintable tr td:first-child{
+	width: 100px;
+    text-align: right;
+    padding-right: 20px;
+}
+
+.noselect{
+	padding:4px 4px;
+	margin-bottom:3px;
+	margin-left:3px;
+	display:inline-block;
+	border: 1px solid rgb(173,175,177);
+	cursor:pointer;
+}
+/*预加载css*/
+.mengban {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: #000 none repeat scroll 0% 0%;
+    opacity: 0.2;
+    filter:alpha(opacity=20);
+    left: 0px;
+    top: 0px;
+    z-index: 9999999999;
+}
+#loading {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 10000000000;
+}
+#provinceTable tr td {
+    text-align:left;
+}
+.attachmentPathDiv .col-sm-9 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

@@ -1,0 +1,72 @@
+1. Widget包删除接口
+	接口地址：https://host:port/cooldev/app/widget/{appWidgetId}
+	调用方法：HTTP DELETE
+
+-----------------------------------------------------------------------
+
+2. Patch包删除接口
+	接口地址：https://host:port/cooldev/app/patch/{appPatchId}
+	调用方法：HTTP DELETE
+
+-----------------------------------------------------------------------
+	
+3. Widget发布接口（发布到EMM）
+	接口地址：https://host:port/cooldev/emm/widget/publish
+	调用方法：HTTP POST
+	参数列表：
+			long appWidgetId,
+			String detail,
+			boolean productEnv,
+			String terminalType,
+			IfStatus forceUpgrade,
+			IfStatus confirmUpgrade,
+			String packageName,
+			String bundleIdentifier,
+			String upgradeTip,
+			String shutdownTip
+
+-----------------------------------------------------------------------
+
+4. Patch发布接口（发布到EMM）
+	接口地址：https://host:port/cooldev/emm/patch/publish
+	调用方法：HTTP POST
+	参数列表：
+			long appPatchId,
+			PATCH_TYPE patchType,
+			String detail,
+			IfStatus forceUpgrade,
+			IfStatus confirmUpgrade,
+			String bundleIdentifier,
+			String upgradeTip,
+			String shutdownTip,
+			String channelCode,
+			String terminalType,
+			boolean productEnv
+			
+-----------------------------------------------------------------------
+
+5. Package版本号获取接口
+	接口地址：https://host:port/cooldev/app/versionNo/package/{appVersionId}
+	调用方法：HTTP GET
+
+-----------------------------------------------------------------------
+
+6. Patch版本号获取接口
+	接口地址：https://host:port/cooldev/app/versionNo/patch/{baseAppVersionId}
+	调用方法：HTTP GET
+
+-----------------------------------------------------------------------
+
+7. Widget版本号获取接口
+	接口地址：https://host:port/cooldev/app/versionNo/widget/{appVersionId}
+	调用方法：HTTP GET
+
+-----------------------------------------------------------------------
+
+8. 代码预览接口（返回代码绝对路径）
+	接口地址：https://host:port/cooldev/app/code/preview/{appId}
+	调用方法：HTTP GET
+	参数列表：
+			String treeId		- 代码相对于仓库的路径
+			String branchName	- 分支名称
+	

@@ -1,0 +1,95 @@
+﻿动态模板描述
+
+添加动态的时候,把信息记录到改文档中,方便以后上线,初始化模板数据
+
+eg:创建团队
+	1. 需要在Enums 类中 找到DYNAMIC_MODULE_TYPE,在其中添加一个类型,创建团队 TEAM_ADD
+	2. 向T_DYNAMIC_MODULE 表中插入一条记录(详见最后)
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>创建了团队<span>%s</span>', 'TEAM_ADD', '/usr/a.png');
+	
+	3.调用添加动态方法:
+	记录消息为 :  {谁}创建了团队{团队名称}
+	this.dynamicService.addTeamDynamic(loginUserId, DYNAMIC_MODULE_TYPE.TEAM_ADD, team.getId(), new Object[]{team});
+	注意:
+		第一点： 最后一个参数 team 为对象, 需要在该对象的实体类中 重写toString()方法,返回此处需要替换到模板中的字符串,比如创建团队,这里传了team对象,需要在Team实体类中重新toString返回
+	
+		@Override
+		public String toString() {
+			return name;
+		}
+		第二点: 创建团队模板中 [<span>%s</span>创建了团队<span>%s</span>] 其中有两个<span>%s</span>,但是传递object数组时候,只传递了一个对象team;是因为第一个<span>%s</span>默认会被当前登录人给替换掉.
+		
+		第三点：  new Object[]{team} 这个object数组中,的每个元素的顺序,应该和模板字符串(<span>%s</span>创建了团队<span>%s</span>)的顺序是匹配的;如果该数组中,传的是普通的对象类型(Integer,String,long等等),
+		    	那么这些数据只用来填充模板,不会插入到对应的 动态依赖表中,如果是对象实体,则会插入到动态的依赖表.
+		    	比如: new Object[]{userName,userSex,user} 这里有三个参数,前两个是普通字符串,则只会用来填充模板,而最后一个是user对象,会插入到对应的动态依赖表中.
+	
+	
+	
+	复制如下语句,修改后添加对应的模板
+	此处记录下模板记录
+	
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>创建了团队<span>%s</span>', 'TEAM_ADD', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>修改了团队<span>%s</span>', 'TEAM_EDIT', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>解散了团队<span>%s</span>', 'TEAM_EXPIRE', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>申请将团队<span>%s</span>绑定企业%s', 'TEAM_ASK_BIND', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>取消将团队<span>%s</span>绑定企业%s的申请', 'TEAM_CANCEL_BIND', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>将团队<span>%s</span>绑定了企业%s', 'TEAM_BIND_ENTERPRISE', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>将团队<span>%s</span>解绑了企业%s', 'TEAM_UNBIND_ENTERPRISE', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>创建了团队项目<span>%s</span>', 'TEAM_CREATE_PRJ', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>邀请了<span>%s</span>加入团队<span>%s</span>', 'TEAM_ASKUSER', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>从团队<span>%s</span>移除了成员<span>%s</span>', 'TEAM_REMOVE_MEMBER', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>从将<span>%s</span>从<span>%s</span>移到了<span>%s</span>', 'TEAM_CHANGE_GROUP', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>退出了团队<span>%s</span>', 'TEAM_EXIT', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>创建了团队小组<span>%s</span>', 'TEAMGROUP_ADD', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>删除了团队小组<span>%s</span>', 'TEAMGROUP_DEL', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>修改了<span>%s</span>的团队权限,从<span>%s</span>改为了<span>%s</span>', 'TEAMAUTH_EDIT', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>创建了资源<span>%s</span>', 'RESOURCE_ADD', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>将资源<span>%s</span>转移到了资源<span>%s</span>下', 'RESOURCE_TRANSFER', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>删除了资源<span>%s</span>', 'RESOURCE_DEL', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>发起了一个讨论<span>%s</span>', 'TOPIC_CREATE', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>在讨论<span>%s</span>中提交了评论', 'TOPIC_COMMENT_CREATE', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>邀请<span>%s</span>参与了讨论<span>%s</span>', 'TOPIC_COMMENT_ADD', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>在讨论<span>%s</span>中回复了<span>%s</span>的评论', 'TOPIC_COMMENT_REPLY', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>删除了评论<span>%s</span>', 'TOPIC_COMMENT_DELETE', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>更新了讨论<span>%s</span>', 'TOPIC_UPDATE', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>删除了讨论<span>%s</span>', 'TOPIC_DELETE', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>创建了文档<span>%s</span>', 'DOCUMENT_CREATE', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>发布了文档<span>%s</span>', 'DOCUMENT_PUBLISH', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>更新了文档<span>%s</span>', 'DOCUMENT_UPDATE', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>删除了文档<span>%s</span>', 'DOCUMENT_DELETE', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>通过导入创建了文档<span>%s</span>', 'DOCUMENT_IMPORT_CREATE', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>创建了文档章节<span>%s</span>', 'DOCUMENTCHAPTER_CREATE', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>更新了文档章节<span>%s</span>', 'DOCUMENTCHAPTER_UPDATE', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>将文档章节<span>%s</span>删除了', 'DOCUMENTCHAPTER_DELETE', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>发不了文档章节<span>%s</span>', 'DOCUMENTCHAPTER_PUBLISH', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>回收了文档章节<span>%s</span>', 'DOCUMENTCHAPTER_RETRIEVED', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>回收了文档<span>%s</span>', 'DOCUMENT_RETRIEVED', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>在文档内容<span>%s</span>中添加了批注', 'DOCUMENT_MARKER', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>创建了流程<span>%s</span>', 'PROCESS_CREATE', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>更新了流程<span>%s</span>的信息', 'PROCESS_UPDATE', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>删除了流程<span>%s</span>', 'PROCESS_DELETE', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>创建了任务<span>%s</span>', 'TASK_CREATE', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>修改了任务<span>%s</span>', 'TASK_UPDATE', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>删除了任务<span>%s</span>', 'TASK_DELETE', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>为任务<span>%s</span>添加了成员<span>%s</span>', 'TASK_ADD_MEMBER', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>为任务<span>%s</span>添加了标签<span>%s</span>', 'TASK_ADD_TAG', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>为任务<span>%s</span>删除了标签<span>%s</span>', 'TASK_REMOVE_TAG', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>为任务<span>%s</span>添加了评论<span>%s</span>', 'TASK_ADD_COMMENT', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>创建了应用<span>%s</span>', 'APP_ADD', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>修改了应用<span>%s</span>', 'APP_EDIT', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>删除了应用<span>%s</span>', 'APP_DELETE', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>基于应用<span>%s</span>创建了分支<span>%s</span>', 'APP_ADD_BRANCH', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>删除了基于应用<span>%s</span>的分支<span>%s</span>', 'APP_DELETE_BRANCH', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>将任务<span>%s</span>的负责人修改为<span>%s</span>', 'TASK_CHANGE_MANAGER', '/usr/a.png');
+	
+	
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>创建了项目<span>%s</span>', 'PROJECT_ADD', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>修改了项目<span>%s</span>', 'PROJECT_EDIT', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>删除了项目<span>%s</span>', 'PROJECT_REMOVE', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>对项目<span>%s</span>绑定了企业', 'PROJECT_BIZ_BIND', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>将项目<span>%s</span>的企业进行了解绑', 'PROJECT_BIZ_UNBIND', '/usr/a.png');
+	INSERT INTO `T_DYNAMIC_MODULE` (formatStr,moduleType,moduleIcon) VALUES ('<span>%s</span>将项目<span>%s</span>转移给了<span>%s</span>', 'PROJECT_TRANSFER', '/usr/a.png');
+	
+
+
+

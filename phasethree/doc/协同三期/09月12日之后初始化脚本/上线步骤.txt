@@ -1,0 +1,2 @@
+1.将writeFileName.sh文件放到服务器的/mnt/glfs/share/bin/coopdev_file目录下面;
+2.

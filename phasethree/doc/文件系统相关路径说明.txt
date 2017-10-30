@@ -1,0 +1,8 @@
+﻿		 文件说明                                配置文件                                              目前路径
+
+1.资源上传                          		resource.properties     				/usr/local/upload 
+2.资源下载(打包下载)       			FileConfig.properties   				/usr/local/zipfile
+
+3.文档导出					FileConfig.properties					/usr/local/zipfile
+4.发布文档下载					FileConfig.properties					/usr/local/downloadDoc
+5.文档上传导入					FileConfig.properties					/usr/local/docUpload

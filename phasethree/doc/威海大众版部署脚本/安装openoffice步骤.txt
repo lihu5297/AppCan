@@ -1,0 +1,88 @@
+一、安装openoffice
+1、首先先下载好需要的rpm包：Apache_OpenOffice_4.0.0_Linux_x86-64_install-rpm_zh-CN.tar.gz
+     或直接命令下载：wget http://heanet.dl.sourceforge.net/project/openofficeorg.mirror/4.0.0/binaries/zh-CN/Apache_OpenOffice_4.0.0_Linux_x86-64_install-rpm_zh-CN.tar.gz
+     放到服务器的目录下（我放到了/usr/share下）
+2、将下载的openoffice解压（我直接解压到opt目录）：tar -zxvf Apache_OpenOffice_4.0.0_Linux_x86-64_install-rpm_zh-CN.tar.gz
+3、解压后生成文件夹zh-CN 进到RPMS目录下，直接yum localinstall *.rpm
+4、再装RPMS/desktop-integration目录下的openoffice4.0-redhat-menus-4.0-9702.noarch.rpm：yum localinstall openoffice4.0-redhat-menus-4.0-9702.noarch.rpm
+5、安装完成直接启动Openoffice服务：
+     临时启动   /opt/openoffice4/program/soffice -headless -accept="socket,host=127.0.0.1,port=8100;urp;" -nofirststartwizard
+
+     一直后台启动 nohup  /opt/openoffice4/program/soffice -headless -accept="socket,host=127.0.0.1,port=8888;urp;" -nofirststartwizard &
+6、查看服务是否启动（端口8100是否被soffice占用）：netstat -lnp |grep 8100
+     显示结果：tcp        0      0 127.0.0.1:8100              0.0.0.0:*                   LISTEN      19501/soffice.bin
+
+	 
+---------------------        如果报错解决办法         ---------------------------------
+	 五、 /opt/openoffice4/program/soffice.bin: error while loading shared libraries: libXext.so.6: cannot open shared object file: No such file or directory
+     解决办法：
+     centos7 64位：
+     yum install libXext.x86_64
+	          
+------------------------------------   以下不需要    -----------------------------------------------
+二、安装swftools(转flash才用)
+1、安装所需的库和组件。机器之前安装过了，主要安装的是下面几个组件。如果不安装会提示machine `x86_64-unknown-linux' not recognized
+yum install gcc* automake zlib-devel libjpeg-devel giflib-devel freetype-devel t1lib-devel zlib
+或者
+yum -y install zlib-devel libjpeg-devel giflib-devel freetype-devel t1lib-devel zlib
+
+2、下载地址：http://www.swftools.org/download.html
+下载安装swftools
+      wget http://www.swftools.org/swftools-0.9.2.tar.gz
+          tar vxzf swftools-0.9.2.tar.gz
+          cd swftools-0.9.2
+          ./configure --prefix=/usr/local/swftools
+          make
+          make install
+          make clean 
+          make distclean
+          whereis pdf2swf
+
+3、设置swftools环境变量，使pdf2swf成为一个可执行命令
+vim /etc/profile
+export PATH=$PATH:/usr/local/swftools/bin/
+
+
+三、安装xpdf语言包。下载xpdf-chinese-simplified.tar.gz文件，解压到/usr/share/xpdf下，编辑add-to-xpdfrc文件，如下：
+ tar zxvf xpdf-chinese-simplified.tar.gz
+         unzip font.zip
+mv Gbsn00lp.ttf gkai00mp.ttf xpdf-chinese-simplified/CMap/
+cd /usr/share/xpdf/xpdf-chinese-simplified
+vi add-to-xpdfrc
+内容如下：
+cidToUnicode   Adobe-GB1       /usr/share/xpdf/xpdf-chinese-simplified/Adobe-GB1.cidToUnicode
+unicodeMap     ISO-2022-CN    /usr/share/xpdf/xpdf-chinese-simplified/ISO-2022-CN.unicodeMap
+unicodeMap     EUC-CN             /usr/share/xpdf/xpdf-chinese-simplified/EUC-CN.unicodeMap
+unicodeMap     GBK           /usr/share/xpdf/xpdf-chinese-simplified/GBK.unicodeMap
+cMapDir            Adobe-GB1       /usr/share/xpdf/xpdf-chinese-simplified/CMap
+toUnicodeDir                      /usr/share/xpdf/xpdf-chinese-simplified/CMap
+displayCIDFontTT Adobe-GB1 /usr/share/xpdf/xpdf-chinese-simplified/CMap/gkai00mp.ttf
+保存后退出
+字体文件自己下载…
+
+
+四、最后使用如下转换命令测试：
+pdf2swf -s languagedir=/usr/local/xpdf-chinese-simplified -T 9 -s poly2bitmap -s zoom=150 -s flashversion=9 "/usr/local/123.pdf" -o "/usr/local/%.swf"
+然后将swf文件sz到本地，拖拽到浏览器中打开看是否可以播放即可
+
+转换成功！搞定！
+附：Linux环境配置文件如下：
+openOfficeStartCommand = /usr/lib/openoffice.org3/program/soffice.bin/ -headless\ -accept="socket,host=127.0.0.1,port=8100;urp;"\ -nofirststartwizard 
+pdfToSwfCommand = /usr/local/swftools/bin/pdf2swf
+bitMapc=-T 9 -s poly2bitmap -s zoom=150 
+zoom=150 
+langc=-s languagedir=/usr/local/xpdf-chinese-simplified 
+port = 8100
+
+
+六、g++: command not found的解决
+ G++没有装或却没有更新
+以下方法都可以试试：
+centos：
+yum -y update gcc
+yum -y install gcc+ gcc-c++
+
+
+ubuntu：
+apt-get update gcc
+apt-get install g++

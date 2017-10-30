@@ -1,0 +1,14 @@
+上线步骤：
+1.替换线上配置文件，打war包；
+2.备份数据库：
+  a.从10.0.3.2服务器上进入/home/backup目录，创建一个以当前日期命名的文件夹，在该文件下面创建企业版或大众版命名的文件夹；
+  b.执行mysqldump -h10.0.3.2 -ucoop_user -pcooppass cooperation >cooperation.sql 改命令对数据库进行备份；
+3.备份代码：
+   执行cp -r /home/dockerData/xt1/tomcat/webapps/cooldev .命令。
+4.进入10.0.3.1服务器，创建相同的目录，只备份代码即可。
+5.上传war包
+  a.进入/mnt/glfs/deploy/xtdeploy目录，创建当前日期文件夹，在该文件下面创建企业版或大众版命名的文件夹；
+  b.将要部署的war包上传到服务器；
+6.进入docker到相应的目录下面，执行 cp /mnt/glfs/deploy/xtdeploy/20161028/enterprise/cooldev.war .
+ 改下日志文件名称
+删除原先代码，解压缩，删除war包，kill掉进程，启动tomcat。

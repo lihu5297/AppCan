@@ -1,0 +1,2 @@
+INSERT INTO T_NOTICE_MODULE (del,noFormatStr,noModuleType) VALUES ('0','您导出的项目:【<span>%s</span>】已导出成功，下载地址：【<span>%s</span>】，请知晓。', 'PROJECT_EXPORT');
+INSERT INTO T_NOTICE_MODULE (del,noFormatStr,noModuleType) VALUES ('0','您项目:【<span>%s</span>】已导入成功，访问链接：【<span>%s</span>】，请知晓。', 'PROJECT_IMPORT');

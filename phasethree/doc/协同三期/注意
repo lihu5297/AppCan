@@ -1,0 +1,5 @@
+1.有一些任务的没有描述,只有标题的,
+   select * from T_TASK where detail is null or detail ='';
+   update T_TASK set detail = name where detail is null or detail ='';
+   
+ 2.

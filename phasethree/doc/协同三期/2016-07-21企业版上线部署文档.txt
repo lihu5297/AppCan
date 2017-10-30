@@ -1,0 +1,46 @@
+=======================20160721企业版上线===========================
+
+1.将两台服务器都停掉.
+
+2.执行以下修改数据库脚本.
+alter table T_PROJECT add pinYinHeadChar varchar(255);
+alter table T_PROJECT add pinYinName varchar(255);
+alter table T_PROCESS add pinYinHeadChar varchar(255);
+alter table T_PROCESS add pinYinName varchar(255);
+alter table T_APP add pinYinHeadChar varchar(255);
+alter table T_APP add pinYinName varchar(255);
+alter table T_TASK_GROUP add pinYinHeadChar varchar(255);
+alter table T_TASK_GROUP add pinYinName varchar(255);
+alter table T_BUG_MODULE add pinYinHeadChar varchar(255);
+alter table T_BUG_MODULE add pinYinName varchar(255);
+alter table T_TEAM add pinYinHeadChar varchar(255);
+alter table T_TEAM add pinYinName varchar(255);
+alter table T_DOCUMENT add pinYinHeadChar varchar(255);
+alter table T_DOCUMENT add pinYinName varchar(255);
+/**上线时看下有没这些字段**/
+alter table T_TASK drop COLUMN progress;
+alter table T_PROJECT add progress int default 0;
+alter table T_PROCESS add progress int default 0;
+
+3.启动服务.
+
+4.启动完成之后,在shell中分别执行以下shell脚本.
+
+curl http://localhost:8081/cooldev/project/addPinyin
+
+curl http://localhost:8081/cooldev/process/addPinyin
+
+curl http://localhost:8081/cooldev/app/addPinyin
+
+curl http://localhost:8081/cooldev/task/addTaskGroupPinyin
+
+curl http://localhost:8081/cooldev/bugModule/addPinyin
+
+curl http://localhost:8081/cooldev/process/initProgress
+
+curl http://localhost:8081/cooldev/project/initProgress
+
+curl http://localhost:8081/cooldev/team/addPinYin
+
+curl http://localhost:8081/cooldev/document/addPinYin
+	

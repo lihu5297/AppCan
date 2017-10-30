@@ -1,0 +1,60 @@
+----创建数据库
+1.创建mysql数据库,字符集选择utf8 -- UTF-8 Unicode,排序规则选择utf8_general_ci;
+2.执行db表结构脚本文件夹下面的weihai_create.sql文件创建表；
+3.执行db初始化脚本文件夹下面的sql文件初始化表；
+4.t_man_setting表里面的字段值需要根据威海那边的具体情况修改值；
+5.初始化T_TIMEDATE表
+insert into T_TIMEDATE(timedate)
+select * from (
+SELECT
+	adddate(
+		(
+			DATE_FORMAT("2016-01-01", '%Y-%m-%d')
+		),
+		numlist.id
+	) AS `date`
+FROM
+	(
+		SELECT
+			n1.i + n10.i * 10 + n100.i * 100 + n1000.i * 1000 AS id
+		FROM
+			 (select 0 as i union  all select 1 union  all select 2 union  all select 3 union  all select 4 union  all select 5 union  all select 6 union  all select 7 union  all select 8 union  all select 9) AS n1
+		CROSS JOIN (select 0 as i union  all select 1 union  all select 2 union  all select 3 union  all select 4 union  all select 5 union  all select 6 union  all select 7 union  all select 8 union  all select 9) AS n10
+		CROSS JOIN (select 0 as i union  all select 1 union  all select 2 union  all select 3 union  all select 4 union  all select 5 union  all select 6 union  all select 7 union  all select 8 union  all select 9) AS n100
+		CROSS JOIN (select 0 as i union  all select 1 union  all select 2 union  all select 3 union  all select 4 union  all select 5 union  all select 6 union  all select 7 union  all select 8 union  all select 9) AS n1000
+		CROSS JOIN (select 0 as i union  all select 1 union  all select 2 union  all select 3 union  all select 4 union  all select 5 union  all select 6 union  all select 7 union  all select 8 union  all select 9) AS n10000		
+	) AS numlist
+) dateList;
+
+----部署协同开发项目
+1.将cooldev.war包解压到/usr/local/apache-tomcat-7.0.63/webapps/cooldev下面；
+2.修改配置文件cooldev.properties文件中gitToken,设置成威海项目用的token；
+3.修改配置文件cooldev.properties文件中数据库地址改成威海数据库的数据库地址；
+4.将coopMan.war包解压到/usr/local/apache-tomcat-7.0.63/webapps/coolMan下面；
+5.启动tomcat,查看启动日志是否报错；
+
+----liunx定时任务
+1.企业版设置如下：
+ 5 */1 * * * /mnt/glfs/share/bin/coopdev_dynamicstatis/enterprise/teamDynamic.sh
+ 6 */1 * * * /mnt/glfs/share/bin/coopdev_dynamicstatis/enterprise/projectDynamic.sh
+ 7 */1 * * * /mnt/glfs/share/bin/coopdev_dynamicstatis/enterprise/userDynamic.sh
+ 1 */1 * * * /mnt/glfs/share/bin/coopdev_dynamicstatis/enterprise/projectReportCurrentDay.sh
+
+2.大众版设置如下：
+ 8 */1 * * * /mnt/glfs/share/bin/coopdev_dynamicstatis/pubver/teamDynamic.sh
+ 9 */1 * * * /mnt/glfs/share/bin/coopdev_dynamicstatis/pubver/projectDynamic.sh
+ 10 */1 * * * /mnt/glfs/share/bin/coopdev_dynamicstatis/pubver/userDynamic.sh
+ 1 */1 * * * /mnt/glfs/share/bin/coopdev_dynamicstatis/pubver/projectReportCurrentDay.sh
+
+-----liunx脚本
+1.将sh脚本下面的文件部署到linux相应目录下面
+2.修改webide_clone.sh中的克隆地址：
+git clone http://jingjian.wu%403g2win.com:123456@newgit.appcan.cn/git$2 /mnt/glfs/share/personal_gitroot/$1$2
+
+-----安装openOffice
+
+-----将efficientUserImportModule.xls，userImportModule.xls放到服务器上
+/home/datastore/coopDevelopment_emm/coopMan/zipfile/userImportModule.xls
+
+
+

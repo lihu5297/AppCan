@@ -1,0 +1,205 @@
+DROP TABLE IF EXISTS `T_PERMISSION_INTERCEPTOR`;
+CREATE TABLE `T_PERMISSION_INTERCEPTOR` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `requestUrl` varchar(255) NOT NULL,
+  `method` varchar(255) NOT NULL,
+  `tableName` varchar(255) NOT NULL,
+  `keyName` varchar(255) NOT NULL,
+  `enName` varchar(255) NOT NULL,
+  `del` tinyint(4) DEFAULT NULL,
+  `createdAt` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updatedAt` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `keyIdType` varchar(255) DEFAULT NULL,
+  `keyIdIndex` tinyint(4) DEFAULT '2',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8;
+
+/**project**/
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/project/-?[0-9]+','PUT','T_PROJECT','projectId','project_edit',0,'pathVariable',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/project/transfer/-?[0-9]+','PUT','T_PROJECT','projectId','project_transfer',0,'pathVariable',3);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/project/-?[0-9]+','DELETE','T_PROJECT','projectId','project_remove',0,'pathVariable',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/project/member$','POST','T_PROJECT','projectId','project_invite_member',0,'parameter',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/project/member/role/-?[0-9]+','PUT','T_PROJECT','memberId','project_change_member_role',0,'pathVariable',4);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/project/member/-?[0-9]+','DELETE','T_PROJECT','memberId','project_remove_member',0,'pathVariable',3);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/project/quit$','PUT','T_PROJECT','projectId','project_exit',0,'parameter',2);
+
+
+/**bug**/
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/bug$','POST','T_PROCESS','processId','bug_create',0,'parameter',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/bug/-?[0-9]+','PUT','T_BUG','bugId','bug_update',0,'pathVariable',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/bugMember/changeAssignedPerson$','PUT','T_BUG','bugId','bug_assign_assignedperson',0,'parameter',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/bugMember/addMember$','POST','T_BUG','bugId','bug_invite_member',0,'parameter',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/bugMember/removeMember$','DELETE','T_BUG','topic_edit','bug_del_member',0,'parameter',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/bugModule$','POST','T_PROJECT','projectId','bug_module_add',0,'parameter',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/bugModule/-?[0-9]+','DELETE','T_PROJECT','projectId','bug_module_del',0,'pathVariable',2);
+
+
+/**process**/
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/process$','POST','T_PROJECT','projectId','process_create',0,'parameter',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/process/member/leader$','PUT','T_PROCESS','processId','process_manager_add',0,'parameter',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/process/member$','POST','T_PROCESS','processId','process_member_add',0,'parameter',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/process/member/-?[0-9]+','DELETE','T_PROCESS','memberId','process_member_remove',0,'pathVariable',3);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/process/-?[0-9]+','PUT','T_PROCESS','processId','process_edit',0,'pathVariable',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/process/-?[0-9]+','DELETE','T_PROCESS','processId','process_remove',0,'pathVariable',2);
+
+
+/**task**/
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/task$','POST','T_PROCESS','processId','task_create',0,'parameter',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/task/taskLeaf$','POST','T_TASK','taskId','task_child_create',0,'parameter',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/task/-?[0-9]+','PUT','T_TASK','taskId','task_edit',0,'pathVariable',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/task/taskLeaf/-?[0-9]+','PUT','T_TASK_LEAF','taskLeafId','task_child_edit',0,'pathVariable',3);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/task/-?[0-9]+','DELETE','T_TASK','taskId','task_remove',0,'pathVariable',2);
+
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/task/taskLeaf/-?[0-9]+','DELETE','T_TASK_LEAF','taskLeafId','task_child_remove',0,'pathVariable',3);
+
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/task/changeManager/-?[0-9]+','PUT','T_TASK','taskId','task_manager_add',0,'pathVariable',3);
+
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/task/member$','POST','T_TASK','taskId','task_member_add',0,'parameter',3);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/task/member/-?[0-9]+','DELETE','T_TASK','memberId','task_member_remove',0,'pathVariable',3);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/task/taskLeaf/-?[0-9]+/upgrade','POST','T_TASK_LEAF','taskLeafId','task_child_to_parent',0,'pathVariable',3);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/task/taskGroup$','POST','T_PROJECT','projectId','task_group_add',0,'parameter',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/task/taskGroup/-?[0-9]+','DELETE','T_TASK_GROUP','taskGroupId','task_group_remove',0,'pathVariable',3);
+
+/**app**/
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/app$','POST','T_PROJECT','projectId','app_create',0,'parameter',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/app/-?[0-9]+','PUT','T_APP','appId','app_edit',0,'pathVariable',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/app/-?[0-9]+','DELETE','T_APP','appId','app_remove',0,'pathVariable',2);
+
+/**topic**/
+
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/topic$','POST','T_PROJECT','projectId','topic_create',0,'parameter',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/topic/-?[0-9]+','PUT','T_TOPIC','topicId','topic_edit',0,'pathVariable',2);
+
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/topic/-?[0-9]+','DELETE','T_TOPIC','topicId','topic_remove',0,'pathVariable',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/topic/member/-?[0-9]+','PUT','T_TOPIC','topicId','topic_member_add',0,'pathVariable',3);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/topic/member/-?[0-9]+','DELETE','T_TOPIC','topicId','topic_member_remove',0,'pathVariable',3);
+
+
+/**code**/
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/app/branch/-?[0-9]+','POST','T_APP','appId','code_create_branch',0,'pathVariable',3);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/app/branch/-?[0-9]+','DELETE','T_APP','appId','code_branch_remove',0,'pathVariable',3);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/app/merge/branch/-?[0-9]+','POST','T_APP','appId','code_merge',0,'pathVariable',4);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/app/version$','POST','T_APP','appId','code_publish',0,'parameter',4);
+
+
+/**version**/
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/app/package$','POST','T_APP','buildJsonSettings','create_package',0,'parameter',3);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/app/version$','DELETE','T_APP','appVersionIdList','version_remove',0,'parameter',3);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/emm/package/publish$','POST','T_APP','appPackageId','publish_package',0,'parameter',3);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/app/patch/-?[0-9]+','POST','T_APP','appVersionId','create_patch',0,'pathVariable',3);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/app/widget$','POST','T_APP','appVersionId','generte_widget',0,'parameter',3);
+
+
+/**engine**/
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/engine$','POST','T_PROJECT','projectId','engine_create',0,'parameter',3);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/engine/-?[0-9]+','PUT','T_ENGINE','engineId','engine_edit',0,'pathVariable',2);
+
+/**plugin**/
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/plugin$','POST','T_PROJECT','projectId','plugin_create',0,'parameter',3);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/plugin/-?[0-9]+','PUT','T_PLUGIN','pluginId','plugin_edit',0,'pathVariable',2);
+
+/*resource*/
+
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/resource$','POST','T_PROJECT','projectId','resource_create_file',0,'parameter',3);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/resource/-?[0-9]+','DELETE','T_RESOURCES','resourceId','resource_remove_file',0,'pathVariable',2);
+
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/resource/updateName/-?[0-9]+','PUT','T_RESOURCES','resourceId','resource_rename',0,'pathVariable',3);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/resource/downPublic/-?[0-9]+','PUT','T_RESOURCES','resourceId','resource_public',0,'pathVariable',3);
+
+
+/**team**/
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/team/-?[0-9]+','PUT','T_TEAM','teamId','team_info',0,'pathVariable',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/team/transfer/-?[0-9]+','PUT','T_TEAM','teamId','team_transfer',0,'pathVariable',3);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/team/-?[0-9]+','DELETE','T_TEAM','teamId','team_remove',0,'pathVariable',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/team/exit/-?[0-9]+','PUT','T_TEAM','teamId','team_exit',0,'pathVariable',3);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/teamMember$','POST','T_TEAM','teamId','team_invite_member',0,'parameter',3);
+
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/teamMember/-?[0-9]+','DELETE','T_TEAM','memberId','team_remove_member',0,'pathVariable',2);
+
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/teamMember/-?[0-9]+','PUT','T_TEAM','memberId','team_group_allocate',0,'pathVariable',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/teamGroup$','PUT','T_TEAM','teamId','team_group_create',0,'parameter',2);
+
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/teamGroup/member/-?[0-9]+','DELETE','T_TEAM','teamId','team_group_remove',0,'parameter',2);
+
+/**document**/
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/document$','POST','T_PROJECT','projectId','document_create',0,'parameter',2);
+
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/docChapter$','POST','T_PROJECT','projectId','document_add_dir',0,'parameter',2);
+
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/document/import$','GET','T_PROJECT','projectId','document_import',0,'parameter',2);
+
+
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/document/-?[0-9]+','DELETE','T_PROJECT','projectId','document_doc_remove',0,'parameter',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/docChapter/-?[0-9]+','DELETE','T_PROJECT','projectId','document_dir_remove',0,'parameter',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/document/pub/-?[0-9]+','PUT','T_PROJECT','projectId','document_publish',0,'parameter',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/docChapter/pub/-?[0-9]+','PUT','T_PROJECT','projectId','document_part_publish',0,'parameter',2);
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/document$','PUT','T_PROJECT','projectId','document_edit_baseinfo',0,'parameter',2);
+
+
+insert into T_PERMISSION_INTERCEPTOR (requestUrl,method,tableName,keyName,enName,del,keyIdType,keyIdIndex) values ('^/docChapter/-?[0-9]+','PUT','T_PROJECT','projectId','document_edit_dir',0,'parameter',2);

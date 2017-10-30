@@ -1,0 +1,3 @@
+----增加资源公开动态模版、资源不公开动态模版
+INSERT INTO T_DYNAMIC_MODULE ( createdAt, del, updatedAt, formatStr, moduleIcon, moduleType) VALUES ( now(), '0', now(), '<span>%s</span>将资源<span>%s</span>设为了公开', '/usr/a.png', 'RESOURCE_OPEN');
+INSERT INTO T_DYNAMIC_MODULE ( createdAt, del, updatedAt, formatStr, moduleIcon, moduleType) VALUES ( now(), '0', now(), '<span>%s</span>将资源<span>%s</span>设为了不公开', '/usr/a.png', 'RESOURCE_CLOSE');

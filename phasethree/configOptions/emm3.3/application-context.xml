@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+       classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd  
+       http://www.springframework.org/schema/context   
+       classpath:/org/springframework/context/config/spring-context-3.1.xsd
+       http://www.springframework.org/schema/task
+      classpath:/org/springframework/scheduling/config/spring-task-3.1.xsd">
+
+	<description>全局性配置文件</description>
+
+
+	<context:component-scan base-package="org.zywx.cooldev">
+		<context:exclude-filter type="regex" expression="org.zywx.cooldev.controller.*" />
+	</context:component-scan>
+
+	<!-- 用于配置文件和注解注入 -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="order" value="1" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="locations"><list><value>classpath:cooldev.properties</value><value>classpath:mail.properties</value></list></property>
+	</bean>
+
+	<!-- 项目初始化 -->
+	<bean id="initializingBean" class="org.zywx.cooldev.system.InitBean"></bean>
+	<!-- git钩子调用拉取代码 -->
+	<bean id="notifyPullBean" class="org.zywx.cooldev.daemon.NotifyPullThread"></bean>
+	
+	<!-- push插件到远程仓库 -->
+	<bean id="builderPushToGitRepo" class="org.zywx.cooldev.thread.BuilderPushToGitRepo">
+		<property name="pluginDao" ref="pluginDao"/>
+		<property name="pluginVersionDao" ref="pluginVersionDao" />
+	</bean>
+	<bean id="pluginDao" class="org.zywx.cooldev.dao.builder.PluginDao"></bean>
+	<bean id="pluginVersionDao" class="org.zywx.cooldev.dao.builder.PluginVersionDao"></bean>
+	<!-- push引擎到远程仓库 -->
+	<bean id="enginePushToGitRepo" class="org.zywx.cooldev.thread.EnginePushToGitRepo">
+		<property name="engineDao" ref="engineDao"/>
+	</bean>
+	<bean id="engineDao" class="org.zywx.cooldev.dao.builder.EngineDao"></bean>
+	
+	<!-- Enables the Spring Task @Scheduled programming model -->
+	<task:executor id="executor" pool-size="5" />
+	<task:scheduler id="scheduler" pool-size="5" />
+	<task:annotation-driven executor="executor" scheduler="scheduler" />
+	
+
+</beans>

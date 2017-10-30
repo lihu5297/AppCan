@@ -1,0 +1,6 @@
+ALTER TABLE T_APP add  platForm varchar(10);
+
+打包之后二维码下载使用逻辑：
+  a.将qr.html 放到对应的nginx目录下/data/mas/TESTMAS1/mas/MASProjects/coopDevelopment/interface/coopDevelopment/00.0001/coopDevelopment/
+  b.前台使用的时候图片
+  <img width="150px" height="150px" src="http://localhost:8080/native/qr?content=http://appcan-cooperation.oss-cn-beijing.aliyuncs.com//11594473/15c623d030c-11232_IOS_01.03.0011_0000.ipa"/>

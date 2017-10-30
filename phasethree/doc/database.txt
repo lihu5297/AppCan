@@ -1,0 +1,9 @@
+数据库1=cooperation
+IP地址=192.168.1.83
+用户名=root
+密码=3g2win
+
+数据库2=coop
+IP地址=192.168.1.83
+用户名=root
+密码=3g2win

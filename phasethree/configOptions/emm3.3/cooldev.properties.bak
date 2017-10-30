@@ -1,0 +1,172 @@
+#
+#\u670d\u52a1\u7248\u672c  \u7ebf\u4e0a\u7248\u672c/\u4f01\u4e1a\u7248\u672c(\u7ebf\u4e0b\u7248\u672c)
+serviceFlag=enterpriseEmm3
+#\u4f01\u4e1a\u7b80\u79f0
+enterpriseId=emm3.3
+#\u4f01\u4e1a\u5168\u79f0
+enterpriseName=\u6b63\u76ca\u79fb\u52a8
+#\u4f01\u4e1a\u7248\u9ed8\u8ba4\u7ed1\u5b9a\u7684\u79df\u6237
+tenantId=643
+key=821fa587
+#\u673a\u5668\u7684IP \u8fd0\u884c\u5b9a\u65f6\u4efb\u52a1\u65f6\u5019,\u53ea\u5728\u96c6\u7fa4\u4e2d\u7684\u4e00\u53f0\u6267\u884c
+machineHost=localhost
+
+#
+#########################################		\u6570\u636e\u5e93\u8fde\u63a5\u76f8\u5173\u914d\u7f6e	################################
+#
+hibernate.database=MYSQL
+hibernate.dbDriver=com.mysql.jdbc.Driver
+hibernate.dbDialect=org.hibernate.dialect.MySQL5InnoDBDialect
+hibernate.dbUsr=root
+hibernate.dbPwd=3g2win
+hibernate.dbUrl=jdbc:mysql://192.168.1.69:3306/cooperateemm3?useUnicode=true&characterEncoding=UTF-8
+
+
+#
+#########################################		rabbitMQ\u76f8\u5173\u914d\u7f6e	################################
+#
+appPackage.rabbitMqHost=192.168.4.35
+appPackage.rabbitMqPort=5672
+appPackage.rabbitMqExchange=exchange.pkg.request
+appPackage.rabbitMqRouteKey=key.pkg.request
+appPackage.rabbitMqQueue=queue.pkg.request
+
+appPackage.rabbitMqUser=guest
+appPackage.rabbitMqPassword=guest
+
+############################################    \u76f8\u5173\u63a5\u53e3\u5730\u5740           \u5f00\u59cb      ####################################
+#
+# git action interfaces
+git.initRepoUrl=http://192.168.1.69.58080/appdo-git-server-webapp/git/initgit
+git.shareRepoUrl=http://192.168.1.69.58080/appdo-git-server-webapp/git/sharegit
+git.removeRepoUrl=http://192.168.1.69.58080/appdo-git-server-webapp/git/deletegit
+git.removeUserUrl=http://192.168.1.69.58080/appdo-git-server-webapp/git/deletepartner
+git.changeOwnerUrl=http://192.168.1.69.58080/appdo-git-server-webapp/git/changeowner
+git.shareallgitauth=http://192.168.1.69.58080/appdo-git-server-webapp/git/shareallgitauth
+git.deleteallpartner=http://192.168.1.69.58080/appdo-git-server-webapp/git/deleteallpartner
+git.changeallpartner=http://192.168.1.69.58080/appdo-git-server-webapp/git/changeallowner
+git.deleteallgit=http://192.168.1.69.58080/appdo-git-server-webapp/git/deleteallgit
+git.getalluser=http://192.168.1.69.58080/appdo-git-server-webapp/git/getalluser
+git.localGitRoot=/mnt/glfs/share/gitroot
+git.remoteGitRoot=http://192.168.1.69:9000
+
+
+#
+# Emm3.0\u7cfb\u7edf\u5e94\u7528\u53d1\u5e03\u63a5\u53e3
+#
+emm.appPublishUrl=http://dashboard.appcan.cn/api_app/index?method=xtkf_create_app
+#
+# Emm3.0\u7cfb\u7edf\u5347\u7ea7\u5305\u53d1\u5e03\u63a5\u53e3
+#
+emm.packPublishUrl=http://dashboard.appcan.cn/api_app/index?method=xtkf_add_version
+#
+# EMM\u53d1\u5e03\u4e4b\u540e,\u9700\u8981\u540c\u65f6\u8c03\u7528baas\u63a5\u53e3
+#
+#emm.appPublishToBaasUrl=http://mas3:28080/baasCon/app/saveOrUpdate
+#
+#\u534f\u540c\u81ea\u5df1\u7684\u63a5\u53e3\u5730\u5740,\u6253\u5305\u56de\u8c03
+#
+appPackage.pkgAccessUrl=http://192.168.1.69:28080/cooldev/app/package/build
+
+#\u7528\u6237\u9ed8\u8ba4\u5934\u50cf\u5730\u5740
+user.icon=http://192.168.1.83:9081/coopDevelopment/headerImg/user-default-icon.png
+#\u672c\u5730\u7528\u6237\u8868\u4e2d\u6ca1\u6709\u7528\u6237\u65f6\u5019,\u4ecesso.host\u63a5\u53e3\u4e2d\u83b7\u53d6\u5230APPCan\u7684\u7528\u6237\u4fe1\u606f,\u4fdd\u5b58\u5230\u672c\u5730\u4f7f\u7528\u7684\u5730\u5740
+sso.host=http://192.168.4.168:8080/getUserDetailByLoginName
+
+#\u534f\u540c\u524d\u7aef\u57df\u540d,\u56e2\u961f\u4e2d\u9080\u8bf7\u6210\u5458\u4e4b\u540e,\u53d1\u9001\u7684\u90ae\u4ef6\u4e2d\u5f15\u7528\u6b64\u5730\u5740,\u7528\u6765\u52a0\u5165\u56e2\u961f
+xietongHost=http://192.168.1.69:28080
+
+emmInvokeTeamUrl=http://192.168.1.69:28080/cooldev
+
+#emm\u8c03\u7528\u56e2\u961f\u6388\u6743\u6821\u9a8cIP
+cooldev.validIp=192.168.1.*,192.168.2.*,192.168.4.*,127.0.0.*,10.1.1.*,10.0.*.*
+
+
+#emm\u63a5\u53e3\u5730\u5740(\u56e2\u961f\u76f8\u5173)
+emmUrl=http://192.168.4.12:8080
+#\u56e2\u961f\u7533\u8bf7\u6388\u6743\u65f6\u5019\u6821\u9a8c\u4f01\u4e1a\u7b80\u79f0\u548c\u5168\u79f0\u662f\u5426\u5339\u914d
+emmValidHost=http://192.168.4.28:8086
+#\u521b\u5efa\u5e94\u7528\u83b7\u53d6appcanappid\u548cappcanappKey
+base.appcan=http://base.appcan.cn/app
+
+
+
+
+
+#
+###################################  			\u4ee3\u7801\u8fd0\u884c\u6240\u5728\u670d\u52a1\u5668\u7684\u76f8\u5173\u8def\u5f84\u914d\u7f6e     	\u5f00\u59cb		#############
+#
+#\u5e94\u7528\u7248\u672c\u4ee3\u7801\u672c\u5730\u5b58\u50a8\u8def\u5f84
+appVersion.codeZipPath=/mnt/glfs/coopDevelopment_private/zipfile/appCode
+#\u8bc1\u4e66\u672c\u5730\u5b58\u50a8\u8def\u5f84
+appPackage.certFileRoot=/mnt/glfs/coopDevelopment_private/certificate
+appPackage.plistRoot=/mnt/glfs/coopDevelopment_private/packStream
+# \u6253\u5305\u6784\u5efa\u8d44\u6e90\u5e93\uff08engine, plugin\u7b49\uff09\u5730\u5740
+appPackage.buildRepoPath=/mnt/glfs/share/gitroot/ENT/ERP/RISE0/enterprise_build.git
+appPackage.buildRepoRelativePath=/ENT/ERP/RISE0/enterprise_build.git
+
+#\u4e00\u4e9b\u6267\u884cshell\u547d\u4ee4\u7684\u5730\u65b9,\u4e3b\u8981\u662fgit\u76f8\u5173
+shellPath=/mnt/glfs/share/bin/
+
+resource.baseDir=/mnt/glfs/coopDevelopment_private/upload
+
+file=/mnt/glfs/coopDevelopment_private/zipfile
+
+download.file=/mnt/glfs/coopDevelopment_private/downloadDoc
+
+document.upload=/mnt/glfs/coopDevelopment_private/docUpload
+
+#
+####################################			nginx\u76f8\u5173\u4e0b\u8f7d\u5730\u5740			#######################
+#
+
+#\u5e94\u7528\u7248\u672c\u4ee3\u7801\u4e0b\u8f7d\u5730\u5740\u524d\u7f00
+appVersion.codeZipUrl=http://192.168.1.83:9100/appCode
+#\u8bc1\u4e66\u4e0b\u8f7d\u5730\u5740\u524d\u7f00
+appPackage.certBaseUrl=http://192.168.1.83:9081/coopDevelopment_online/certificate
+
+appPackage.plistBaseUrl=http://192.168.1.83:9081/coopDevelopment_online/packStream
+
+#\u8bc1\u4e66\u4e0b\u8f7d
+certHost=http://192.168.1.83:10000
+
+#\u8d44\u6e90\u56fe\u7247\u56de\u663e\u5730\u5740
+#BASEURI=http://192.168.1.83:9081
+BASEURI=/zymobiResource/upload
+
+
+
+#\u6587\u6863\u5bfc\u51famarkdown\u7684ip\u53ca\u7aef\u53e3\u914d\u7f6e
+host=http://192.168.1.69/zymobiResource/zipfile
+# when published document,that url will be constructed the shared document url
+document.nginx.url=http://zymobitest.appcan.cn/doc/
+
+
+#
+##################################				\u4ea7\u54c1license\u6821\u9a8c     product authorize###########################
+#
+product.ip=192.168.1.83
+product.mac=11:12:13:14:15:16
+product.name=EMM
+
+#post advice to siteadm.appcan.cn
+statistic.url=http://siteadm.appcan.cn/Daemon/coopadvice/add.json
+
+
+###################################            \u9884\u89c8\u76f8\u5173\u53c2\u6570\u914d\u7f6e                   ############################
+#\u8d44\u6e90\u6839\u5730\u5740
+root.path=/usr/local
+#\u652f\u6301\u56fe\u7247\u9884\u89c8\u7684\u7c7b\u578b
+picture.type=.JPEG;.JPG;.PNG;.SWF;.SVG;.PCX;.DXF;.WMF;.EMF;.TIFF;.PSD;.GIF;.BMP
+#\u652f\u6301\u9884\u89c8\u7684\u6587\u672c\u7c7b\u578b
+file.type=.TXT;.JS;.CSS;.HTML;.JSP
+#\u8f6c\u6362\u4e4b\u540e\u7684\u7c7b\u578b
+file.destinateTypes=.ODT
+#openoffice \u548c \u8f6c\u6362\u6587\u6863\u7c7b\u578b
+#openoffice\u7aef\u53e3\u5730\u5740
+openoffice.host=127.0.0.1
+openoffice.port=8888
+#\u8f6c\u6362\u652f\u6301\u7684\u6587\u6863\u7c7b\u578b
+office.supportTypes=.DOC;.DOCX;.XLS;.XLSX;.PPT;.PPTX
+#\u8f6c\u6362\u4e4b\u540e\u7684\u7c7b\u578b
+office.destinateTypes=.HTML

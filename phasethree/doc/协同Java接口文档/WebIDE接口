@@ -1,0 +1,51 @@
+1. 创建文件夹
+	接口地址：https://host:port/cooldev/webide/folder
+	调用方法：HTTP POST
+	参数列表：
+			long	appId			应用ID（注意不是appcanAppId）
+			String	relativePath	仓库相对路径（路径开头/有或无均可）
+
+2. 修改文件夹名称
+	接口地址：https://host:port/cooldev/webide/folder
+	调用方法：HTTP PUT
+	参数列表：
+			long	appId			应用ID（注意不是appcanAppId）
+			String	relativePath	仓库相对路径（路径开头/有或无均可）
+			String	newName			文件夹新名称
+
+3. 删除文件夹
+	接口地址：https://host:port/cooldev/webide/folder
+	调用方法：HTTP DELETE
+	参数列表：
+			long	appId			应用ID（注意不是appcanAppId）
+			String	relativePath	仓库相对路径（路径开头/有或无均可）
+			
+4. 创建文件
+	接口地址：https://host:port/cooldev/webide/file
+	调用方法：HTTP POST
+	参数列表：
+			long	appId			应用ID（注意不是appcanAppId）
+			String	relativePath	夹仓库相对路径（路径开头/有或无均可）
+			
+5. 修改文件名称
+	接口地址：https://host:port/cooldev/webide/file
+	调用方法：HTTP PUT
+	参数列表：
+			long	appId			应用ID（注意不是appcanAppId）
+			String	relativePath	仓库相对路径（路径开头/有或无均可）
+			String	newName			文件新名称
+
+6. 删除文件
+	接口地址：https://host:port/cooldev/webide/file
+	调用方法：HTTP DELETE
+	参数列表：
+			long	appId			应用ID（注意不是appcanAppId）
+			String	relativePath	仓库相对路径（路径开头/有或无均可）
+			
+7. 浏览个人仓库
+	接口地址：https://host:port/cooldev/webide/browse
+	调用方法：HTTP GET
+	参数列表：
+			long	appId			应用ID（注意不是appcanAppId）
+			String	relativePath	仓库相对路径（路径开头/有或无均可）	
+			

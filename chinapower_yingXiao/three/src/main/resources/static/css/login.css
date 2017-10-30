@@ -1,0 +1,11 @@
+*{margin:0; padding:0;}
+body{width: 100%; height: 100%; position: absolute; font-family: "微软雅黑";}
+.logobg{position:fixed; width: 100%; height: 100%; z-index: -1}
+.logo{width: 100%; height: 60px; display: block; margin: 13% 0 45px; text-align: center;}
+div.info{display: block; width: 300px; height: 230px; margin: 0 auto;}
+.info .userName,.info .password,.info .checkcode,.info .code,.info .loginIn{width: 100%; height: 35px; line-height: 35px; padding: 0 10px; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; border:1px solid #7f8d9d; box-shadow: -1px -1px 1px #d0dcea inset; -moz-box-shadow: -1px -1px 1px #d0dcea inset; color: #434343; font-size: 14px; margin-bottom: 18px;}
+.info .checkcode{width: 202px; }
+.info .code{cursor: pointer; background-color: #91a5c3; width: 90px; color: #fff; font-family: "MV Boli"; text-align: center; display: block; float: right; border: 0; box-shadow: -1px -1px 1px #d0dcea inset; font-size: 20px; box-shadow: none; }
+.info .loginIn{color: #fff; border:0; height: 40px; line-height: 40px; margin-top: 18px; box-shadow: none;}
+#copyright{position: absolute; bottom: 40px; width: 100%; height: 40px;}
+.copyright{color: #224e84; font-size: 14px; line-height: 20px; width:290px; text-align: center; margin: 0 auto}

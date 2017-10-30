@@ -1,0 +1,4 @@
+-----
+1.配置nginx脚本
+
+2.往T_PERMISSION_TYPE_AUTH表里面插入数据的时候须将permissionId查询出来

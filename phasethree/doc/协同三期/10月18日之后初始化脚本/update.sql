@@ -1,0 +1,1 @@
+ALTER TABLE T_USER ADD COLUMN nickName varchar(255);

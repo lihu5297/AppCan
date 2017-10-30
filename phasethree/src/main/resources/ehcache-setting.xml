@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+    <!-- 指定一个文件目录，当EhCache把数据写到硬盘上时，将把数据写到这个文件目录下 -->
+ <!--    <diskStore path="c:/tmp"/>-->
+    <diskStore path="/usr/local/apache-tomcat-7.0.63/logs/springcache"/> 
+
+    <!-- 设定缓存的默认数据过期策略 -->
+    <defaultCache
+            maxElementsInMemory="10000" 
+            eternal="false" 
+            overflowToDisk="true"
+            timeToIdleSeconds="10"
+            timeToLiveSeconds="20"
+            diskPersistent="false"
+            diskExpiryThreadIntervalSeconds="120"/>
+
+<!-- 项目列表 -->
+    <cache name="ProjectService_getProjectList"
+        maxElementsInMemory="1000"
+        eternal="false"
+        overflowToDisk="true"
+        timeToIdleSeconds="10"
+        timeToLiveSeconds="20"/>
+ <!-- 工作台 -->
+    <cache name="ProjectService_getWorkPlatList"
+        maxElementsInMemory="1000"
+        eternal="false"
+        overflowToDisk="true"
+        timeToIdleSeconds="10"
+        timeToLiveSeconds="20"/>       
+        
+<!-- 任务详情 -->
+    <cache name="TaskService_getTask"
+        maxElementsInMemory="1000"
+        eternal="false"
+        overflowToDisk="true"
+        timeToIdleSeconds="10"
+        timeToLiveSeconds="20"/>
+<!-- 任务>>查询某个人能看到的所有任务标签名称-->
+    <cache name="TaskService_getTagNameForTasklist"
+        maxElementsInMemory="1000"
+        eternal="false"
+        overflowToDisk="true"
+        timeToIdleSeconds="10"
+        timeToLiveSeconds="20"/>
+ <!-- 任务>>查询某个人能看到的所有任务id集合-->
+    <cache name="TaskService_getTaskIdsForSomeOne"
+        maxElementsInMemory="1000"
+        eternal="false"
+        overflowToDisk="true"
+        timeToIdleSeconds="30"
+        timeToLiveSeconds="40"/>       
+  <!-- 任务列表-->
+    <cache name="TaskService_getTaskLists"
+        maxElementsInMemory="1000"
+        eternal="false"
+        overflowToDisk="true"
+        timeToIdleSeconds="10"
+        timeToLiveSeconds="20"/>       
+  <!-- 资源列表-->
+    <cache name="Resource_findResourceList"
+        maxElementsInMemory="1000"
+        eternal="false"
+        overflowToDisk="true"
+        timeToIdleSeconds="30"
+        timeToLiveSeconds="40"/>      
+        
+
+</ehcache>

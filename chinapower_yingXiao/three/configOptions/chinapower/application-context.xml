@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+       classpath:/org/springframework/beans/factory/xml/spring-beans-3.1.xsd  
+       http://www.springframework.org/schema/context   
+       classpath:/org/springframework/context/config/spring-context-3.1.xsd">
+
+	<description>全局性配置文件</description>
+
+
+	<context:component-scan base-package="org.zywx.coopman">
+		<context:exclude-filter type="regex" expression="org.zywx.coopman.controller.*" />
+		<context:exclude-filter type="regex" expression="org.zywx.coopman.aop.*" />
+	</context:component-scan>
+
+	<!-- 用于配置文件和注解注入 -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="order" value="1" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="locations"><list><value>classpath:coopMan.properties</value></list></property>
+	</bean>
+
+	<!-- 项目初始化 -->
+	<bean id="initializingBean" class="org.zywx.coopman.system.InitBean"></bean>
+	<!-- 平台备份定时器 -->
+	<bean id="quartzJob" class="org.zywx.coopman.entity.scheduler.QuartzJob"></bean>
+	<!-- 平台日志定时器 -->
+	<bean id="platLogReadJob" class="org.zywx.coopman.entity.scheduler.PlatLogReadJob"></bean>
+	<!-- 空间统计定时器 -->
+	<bean id="statisticDiskJob" class="org.zywx.coopman.entity.scheduler.StatisticDiskJob"></bean>
+	<!-- 空间统计定时器 -->
+	<bean id="backupThread" class="org.zywx.coopman.entity.scheduler.BackupThread"></bean>
+	
+	<import resource="classpath:spring-sentinel.xml" />
+</beans>

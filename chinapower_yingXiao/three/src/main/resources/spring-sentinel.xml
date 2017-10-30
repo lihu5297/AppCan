@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"  
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"  
+    xmlns:aop="http://www.springframework.org/schema/aop"  
+    xsi:schemaLocation="  
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">  
+  
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">  
+        <property name="maxTotal" value="${im.hs.server.redis.maxTotal}" />  
+        <property name="minIdle" value="${im.hs.server.redis.minIdle}" />  
+        <property name="maxWaitMillis" value="${im.hs.server.redis.maxWaitTime}" />  
+        <property name="maxIdle" value="${im.hs.server.redis.maxIdle}" />  
+        <property name="testOnBorrow" value="${im.hs.server.redis.testOnBorrow}" />  
+        <property name="testOnReturn" value="true" />  
+        <property name="testWhileIdle" value="true" />  
+    </bean>  
+  
+    <bean id="sentinelConfiguration"  
+        class="org.springframework.data.redis.connection.RedisSentinelConfiguration">  
+        <property name="master">  
+            <bean class="org.springframework.data.redis.connection.RedisNode">  
+                <property name="name" value="${im.hs.server.redis.sentinel.masterName}"></property>  
+            </bean>  
+        </property>  
+        <property name="sentinels">  
+            <set>  
+                <bean class="org.springframework.data.redis.connection.RedisNode">  
+                    <constructor-arg name="host"  
+                        value="${im.hs.server.redis.sentinel1.host}"></constructor-arg>  
+                    <constructor-arg name="port"  
+                        value="${im.hs.server.redis.sentinel1.port}"></constructor-arg>  
+                </bean>  
+                <bean class="org.springframework.data.redis.connection.RedisNode">  
+                    <constructor-arg name="host"  
+                        value="${im.hs.server.redis.sentinel2.host}"></constructor-arg>  
+                    <constructor-arg name="port"  
+                        value="${im.hs.server.redis.sentinel2.port}"></constructor-arg>  
+                </bean>  
+                <bean class="org.springframework.data.redis.connection.RedisNode">  
+                    <constructor-arg name="host"  
+                        value="${im.hs.server.redis.sentinel3.host}"></constructor-arg>  
+                    <constructor-arg name="port"  
+                        value="${im.hs.server.redis.sentinel3.port}"></constructor-arg>  
+                </bean>  
+            </set>  
+        </property>  
+    </bean>  
+  
+    <bean id="connectionFactory"  
+        class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">  
+        <constructor-arg name="sentinelConfig" ref="sentinelConfiguration"></constructor-arg>  
+        <constructor-arg name="poolConfig" ref="poolConfig"></constructor-arg>  
+        <property name="database" value="${im.hs.server.redis.database}"></property>
+         <property name="password" value="${im.hs.server.redis.password}"></property>
+        
+    </bean>  
+  
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">  
+        <property name="connectionFactory" ref="connectionFactory" />  
+    </bean>  
+</beans>

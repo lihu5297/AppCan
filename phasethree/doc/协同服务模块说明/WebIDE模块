@@ -1,0 +1,2 @@
+在cooldev.properties中增加配置项webide.personalGitRoot用于存储个人仓库根目录
+应用的个人仓库路径规范：${webide.personalGitRoot}/userId/xxxxxx.git

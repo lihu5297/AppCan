@@ -1,0 +1,5 @@
+1.新增接口：
+	a./team/authronized/getUserList/{teamId}   EMM调用获取要绑定的团队的成员信息;
+	b./projectEmmInvoke/isApproveBind/getUserList/{projectId}  EMM调用获取要绑定的项目的成员信息.
+2.修改接口：
+	a./emm/app/publish 发布应用时增加项目或团队uuid、项目或团队名称属性.
